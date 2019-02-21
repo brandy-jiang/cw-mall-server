@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>寄回商品</title>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+			
+        <link href="css/stylet.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="css/news.css" />
+      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	$(window).load(function(){
+    		$(".loading").addClass("loader-chanage")
+    		$(".loading").fadeOut(300)
+    	})
+    </script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+<body>
+	<header class="top-header">
+			<a class="icona" href="javascript:history.go(-1)">
+					<img src="images/left.png"/>
+				</a>
+			<h3>寄回商品</h3>
+			<a class="iconb" href="shopcar.html">
+			</a>
+	</header>
+	 <section class="aui-scrollView" style="background:#ffffff">
+                <div class="aui-step">
+                    <ul class="aui-step-content">
+                        <li class="aui-step-item aui-step-item-current">
+                            <em class="aui-step-mark"></em>
+                            <div class="aui-step-text">填写申请</div>
+                        </li>
+                        <li class="aui-step-item aui-step-item-current-info">
+                            <em class="aui-step-mark"></em>
+                            <div class="aui-step-text">寄回商品</div>
+                        </li>
+                        <li class="aui-step-item">
+                            <em class="aui-step-mark"></em>
+                            <div class="aui-step-text">极速退款</div>
+                        </li>
+                        <li class="aui-step-item">
+                            <em class="aui-step-mark"></em>
+                            <div class="aui-step-text">退款成功</div>
+                        </li>
+                    </ul>
+                </div>
+	<div class="contaniner">
+		<ul class="self-data">
+			
+			
+			<li>
+				<a href="#">
+					<p>订单号</p>
+					<small>222222221223</small>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<p>退货人</p>
+					<small>张三</small>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<p>联系电话</p>
+					<small>222222221223</small>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<p>联系地址</p>
+					<small>上海市杨浦区</small>
+				</a>
+			</li>
+			<li class="txt">
+				<a href="#">
+					<p>快递公司名称</p>
+					<input type="text" placeholder="输入快递公司名称"/>
+				</a>
+			</li>
+			<li class="txt">
+				<a href="#">
+					<p>快递单号</p>
+					<input type="text" placeholder="输入快递单号"/>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+	
+	<footer class="buy-footer fixed-footer">
+			
+				
+				<input type="button" value="下一步" onClick="javascript:window.location='tuihuo3.html'" />
+	</footer>
+	
+	
+
+</body>
+</html>

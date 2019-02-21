@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" language="JavaScript">
+    var id = '';
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 345
+	});
+	id = getUrlParameter('id');
+    console.log(id);
+	if(id && id != null){
+        $.post("/api/backend/user/view",{id:id},function(data){
+            console.log(data);
+            $("#username").val(data.nickname);
+            $("#mobile").val(data.mobile);
+            $("#level").val(data.level);
+            $("#invCode").val(data.invCode);
+            $("#bankName").val(data.bankName);
+            $("#bankCardNo").val(data.bankCardNo);
+            $("#score").val(data.score);
+        });
+    }
+});
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function submitForm(){
+    var param = {};
+    if(id != ''){
+        param['id'] = id;
+    }
+    if($("#username").val() != ''){
+        param['username'] = $("#username").val();
+    }
+    if($("#mobile").val() != ''){
+        param['mobile'] = $("#mobile").val();
+    }
+    if($("#level").val() != ''){
+        param['level'] = parseInt($("#level").val());
+    }
+    if($("#invCode").val() != ''){
+        param['invCode'] = $("#invCode").val();
+    }
+    if($("#password").val() != ''){
+        param['password'] = $("#password").val();
+    }
+    if($("#rePassword").val() != ''){
+        param['rePassword'] = $("#rePassword").val();
+    }
+    if($("#bankName").val() != ''){
+        param['bankName'] = $("#bankName").val();
+    }
+    if($("#bankCardNo").val() != ''){
+        param['bankCardNo'] = $("#bankCardNo").val();
+    }
+    if($("#score").val() != ''){
+        param['score'] = parseInt($("#score").val());
+    }
+    console.log(param);
+
+    $.post("/api/backend/user/add",
+        param,
+        function( data ){
+            if(data.msg == 'success'){
+                window.location = 'user_list.html';
+            }
+        });
+}
+
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="user_list.html">用户管理</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>添加用户信息</span></div>
+    <!--<form action="/api/backend/user/add" method="post">-->
+    <table cellpadding="0" cellspacing="0" border="0" class="tab_info">
+		<tr>
+			<th>用户名：</th>
+			<td><input name="username" id="username" type="text" class="dfinput" /></td>
+			<th>推荐人:</th>
+			<td><input name="invCode" id="invCode" type="text" class="dfinput" /></td>
+		</tr>
+		<tr>
+			<th>密码:</th>
+			<td><input name="password" id="password" type="password" class="dfinput" /></td>
+			<th>确认密码:</th>
+			<td><input name="rePassword" id="rePassword" type="password" class="dfinput"/></td>
+		</tr>
+		<tr>
+			<th>手机号:</th>
+			<td><input name="mobile" id="mobile" type="text" class="dfinput"/></td>
+			<th>用户等级:</th>
+			<td>
+				<div class="vocation">
+					<select class="select3" name="level" id="level">
+						<option selected value="">请选择</option>
+						<option value="0">普通会员</option>
+						<option value="1">黄金会员</option>
+						<option value="2">钻石会员</option>
+						<option value="3">代理人</option>
+						<option value="4">合伙人</option>
+					</select>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>开户行:</th>
+			<td><input name="bankName" id="bankName" type="text" class="dfinput" /></td>
+			<th>开户行账号:</th>
+			<td><input name="bankCardNo" id="bankCardNo" type="text" class="dfinput"/></td>
+		</tr>
+		<tr>
+			<th>收款码:</th>
+			<td><input name="" type="file" class="dfinput"/></td>
+			<th>积分：</th>
+			<td><input name="score" id="score" type="text" class="dfinput" /></td>
+		</tr>
+	</table>
+    <center>
+    <ul class="forminfo">
+       <li><label>&nbsp;</label><input name="submit" type="button" onclick="submitForm();" class="btn" value="保存"/> <input name="reset" type="reset" class="scbtn2" value="重置"/>  <input name="" type="button" class="scbtn1" value="返回" onclick="javascript:history.go(-1)"/></li>
+    </ul>
+    <center>
+    </form>
+    
+    </div>
+
+
+</body>
+
+</html>

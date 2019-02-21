@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 345
+	});
+});
+
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="caseManager_list.html">用户管理</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>添加用户信息</span></div>
+    <form>
+    <table cellpadding="0" cellspacing="0" border="0" class="tab_info">
+		<tr>
+			<th>用户名：</th>
+			<td><input name="" type="text" class="dfinput" /></td>
+			<th>推荐人:</th>
+			<td><input name="" type="password" class="dfinput" /></td>
+		</tr>
+		<tr>
+			<th>密码:</th>
+			<td><input name="fName" type="text" class="dfinput" /></td>
+			<th>确认密码:</th>
+			<td><input name="DOB" type="text" class="dfinput"/></td>
+		</tr>
+		<tr>
+			<th>手机号:</th>
+			<td><input name="" type="text" class="dfinput"/></td>
+			<th>用户等级:</th>
+			<td>
+				<div class="vocation">
+					<select class="select3">
+							<option>会员</option>
+							<option>主任</option>
+							<option>经理</option>
+							<option>董事</option>
+							<option>联创</option>
+						</select>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>开户行:</th>
+			<td><input name="fName" type="text" class="dfinput" /></td>
+			<th>开户行账号:</th>
+			<td><input name="DOB" type="text" class="dfinput"/></td>
+		</tr>
+		<tr>
+			<th>收款码:</th>
+			<td><input name="" type="file" class="dfinput"/></td>
+			<th>积分：</th>
+			<td><input name="fName" type="text" class="dfinput" /></td>
+		</tr>
+	</table>
+    <center>
+    <ul class="forminfo">
+       <li><label>&nbsp;</label><input name="submit" type="submit" class="btn" value="保存"/> <input name="reset" type="reset" class="scbtn2" value="重置"/>  <input name="" type="button" class="scbtn1" value="返回" onclick="javascript:history.go(-1)"/></li>
+    </ul>
+    <center>
+    </form>
+    
+    </div>
+
+
+</body>
+
+</html>

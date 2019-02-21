@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<title>报表</title>
+ <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	$(window).load(function(){
+    		$(".loading").addClass("loader-chanage")
+    		$(".loading").fadeOut(300)
+    	})
+    </script>
+</head>
+<body>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<div class="report_Title">
+	<br/>
+	报表统计<br/>
+￥398.34
+</div>
+
+<div class="report_total">
+	<div class="report_totalTitle">统计概览</div>
+	<table cellpadding="0" cellspacing="0" align="center" class="tab_reportTable">
+		
+		<tr>
+			<td>
+			累计订单数（笔）<br />
+			<strong>5</strong>
+			</td>
+			<td>累计收益（笔）
+				<br />
+				<strong>￥398.34</strong>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>今日新增业绩
+				<br />
+				<strong>0.00</strong>
+			</td>
+			<td>市场总业绩
+				<br />
+				<strong>0.00</strong>
+			</td>
+		</tr>
+		
+		
+	
+		<tr onClick="javascript:window.location='market1.html'">
+			<td colspan="2">我的团队（人）<br /><strong>35</strong></td>
+		</tr>
+	</table>
+</div>
+</body>
+
+
+</html>

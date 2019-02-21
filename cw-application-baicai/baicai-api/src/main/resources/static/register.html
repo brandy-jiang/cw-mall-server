@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>会员注册</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+	$(window).load(function(){
+        var invCode = getUrlParameter("invCode");
+        $.post("/api/user/genNewCode" ,function( data ){
+            var genCode = data.username;
+            $("#invCode").val(invCode);
+            $("#username").val(genCode);
+            $(".loading").addClass("loader-chanage");
+            $(".loading").fadeOut(300);
+
+        });
+
+
+
+
+	})
+	function ccc(){
+        $.post("/api/user/smsCode",{ mobile: $("#mobile").val() } ,function( data ){
+            alert(data.username);
+        });
+		//alert('aaa');
+	}
+	function submitForm() {
+        $("#f1").submit();
+    }
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<div class="login clearfloat box-s">
+			<h3>会员注册</h3>
+            <form action="/api/user/register" method="post" id="f1">
+			<div class="list clearfloat">
+				<ul>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont">推荐人</i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="invCode" id="invCode" value="" placeholder="推荐人" readonly />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yonghuming"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="myCode" id="username" value="" placeholder="用户名" readonly/>
+						</div>
+					</li>
+                    <li class="ra3">
+                        <p class="fl clearfloat">
+                            <span class="opa5"></span>
+                            <i class="iconfont icon-shouji"></i>
+                        </p>
+                        <div class="nr clearfloat fl">
+                            <span class="opa3"></span>
+                            <input type="text" name="nickname" id="nickname" value="" placeholder="昵称" />
+                        </div>
+                    </li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-mima"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="password" name="password" id="password" value="" placeholder="登录密码" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-shouji"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="mobile" id="mobile" value="" placeholder="手机号码" />
+						</div>
+					</li>
+					
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yanzhengma"></i>
+						</p>
+						<div class="nr nrtwo clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="smsCode" id="smsCode" value="" placeholder="验证码" />
+							<input type="button" class="db fr btn" onClick="ccc();"  value="发送验证码" />
+						
+						</div>
+					</li>
+				</ul>
+			</div>			
+			<div class="login-btn">
+				<!--<a href="success.html">-->
+                <a href="#" onclick="submitForm();">
+					注册
+				</a>
+			</div>
+			<div class="mima mimaone clearfloat">
+				<ul>
+					<li class="fr">
+						<a href="login.html">立即登录</a>
+					</li>
+				</ul>
+			</div>
+            </form>
+		</div>
+	</body>
+</html>

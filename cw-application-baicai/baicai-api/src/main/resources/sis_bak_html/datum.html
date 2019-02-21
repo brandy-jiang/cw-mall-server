@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的资料</title>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	$(window).load(function(){
+            $.post("/api/user/profile", function( data ){
+                console.log(data.bankName);
+
+                document.getElementById('nickname').innerText = data.nickname;
+                document.getElementById('logo1').src = data.headImgUrl;
+                document.getElementById('sex').value = data.sex;
+                document.getElementById('bankCardNo').value = data.bankCardNo;
+				document.getElementById('bankName').value = data.bankName;
+
+
+                console.log(data.nickname);
+            });
+    		$(".loading").addClass("loader-chanage")
+    		$(".loading").fadeOut(300)
+    	})
+    </script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+<body>
+	<header class="top-header">
+			<a class="icona" href="javascript:history.go(-1)">
+					<img src="images/left.png"/>
+				</a>
+			<h3>我的资料</h3>
+			<a class="iconb" href="shopcar.html">
+			</a>
+	</header>
+	<form method="post" action="/api/user/update">
+	<div class="contaniner">
+		<ul class="self-data">
+			<li>
+				<a href="#">
+					<p>头像</p>
+					<span><img src="images/right.png"/></span>					
+					<figure><img id="logo1" src=""/></figure>
+				</a>
+			</li>
+			<li>
+				<a href="namechange.html">
+					<p>昵称</p>
+					<span><img src="images/right.png"/></span>
+					<small id="nickname">loading...</small>
+					
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<p>性别</p>
+					<span><img src="images/right.png"/></span>
+					<select id="sex">
+						<option value="1">男</option>
+						<option value="0">女</option>
+					</select>
+					
+				</a>
+			</li>
+			
+			<li class="txt">
+				<img src="images/bank.png"/>
+				<input type="text" name="bankName" id="bankName" placeholder="输入银行开户行"/>
+			</li>
+			<li class="txt">
+				<img src="images/credit.png"/>
+				<input type="text" name="bankCardNo" id="bankCardNo" placeholder="输入银行卡卡号"/>
+			</li>
+			
+
+			<li class="txt">
+				<img src="images/password.png"/>
+				<input type="password" name="payPassword" placeholder="输入交易密码"/>
+			</li>
+			<li class="txt">
+				<img src="images/password.png"/>
+				<input type="password" name="rePayPassword" placeholder="再次输入交易密码"/>
+			</li>
+		</ul>
+	</div>
+	
+	<footer class="buy-footer fixed-footer">
+
+
+				<input type="submit" value="保存"/>
+	</footer>
+	</form>
+	
+	
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+	var id = '';
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+	id = getUrlParameter('id');
+    console.log(id);
+    if(id && id != null){
+        $.post("/api/backend/product/view",{id:id},function(data){
+            console.log(data);
+            $("#name").val(data.name);
+            $("#type").val(data.type).change();
+            $("#description").val(data.description);
+            $("#stock").val(data.stock);
+            $("#price").val(data.price);
+            $("#marketPrice").val(data.marketPrice);
+            $("#status").val(data.intStatus).change();
+            $("#score").val(data.score);
+            $("#scoreGained").val(data.scoreGained);
+        });
+    }
+});
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function submitForm(){
+    var param = {};
+    if(id != ''){
+        param['id'] = id;
+    }
+    if($("#name").val() != ''){
+        param['name'] = $("#name").val();
+    }
+    if($("#mobile").val() != ''){
+        param['type'] = $("#type").val();
+    }
+    if($("#description").val() != ''){
+        param['description'] = $("#description").val();
+    }
+    if($("#stock").val() != ''){
+        param['stock'] = $("#stock").val();
+    }
+    if($("#marketPrice").val() != ''){
+        param['marketPrice'] = $("#marketPrice").val();
+    }
+    if($("#price").val() != ''){
+        param['price'] = $("#price").val();
+    }
+    if($("#score").val() != ''){
+        param['score'] = $("#score").val();
+    }
+    if($("#scoreGained").val() != ''){
+        param['scoreGained'] = $("#scoreGained").val();
+    }
+    if($("#status").val() != ''){
+        param['intStatus'] = $("#status").val();
+    }
+
+
+    console.log(param);
+
+    $.post("/api/backend/product/add",
+        param,
+        function( data ){
+            if(data.msg == 'success'){
+                window.location = 'product_list.html';
+            }
+        });
+}
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">商品发布</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>添加商品</span></div>
+    <form>
+    <ul class="forminfo">
+    <li><label>商品名称<b>*</b></label><input name="" id="name" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+   
+    <li><label>商品类别<b>*</b></label>
+		 <div class="vocation">
+				<select class="select1" id="type">
+					<option value="">请选择</option>
+					<option value="0">白菜商城</option>
+					<option value="1">积分商城</option>
+				</select>
+			</div>
+    </li>
+    
+   	
+    <li><label>商品详情<b>*</b></label>
+    
+
+    <textarea id="content7" name="content" style="width:700px;height:250px;visibility:hidden;"></textarea>
+    
+    </li>
+	<li><label>商品数量<b>*</b></label><input name="" id="stock" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+    <li><label>市场价<b>*</b></label><input name="" id="marketPrice" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+	<li><label>菜心<b>*</b></label><input name="" id="price" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+	<li><label>积分<b>*</b></label><input name="" id="score" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+        <li><label>购买获得积分<b>*</b></label><input name="" id="scoreGained" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+	<li><label>分享奖<b>*</b></label>
+		<fieldset>
+			<table>
+				<tr>
+					<th>会员1奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>会员2奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>会员3奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+			</table>
+			
+		</fieldset>
+	</li>
+	<li><label>业绩奖<b>*</b></label>
+		<fieldset>
+			<table>
+				<tr>
+					<th>钻石会员奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>代理人奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>合伙人奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+			</table>
+		</fieldset>
+	</li>
+	<li><label>是否上架<b>*</b></label>
+		 <div class="vocation">
+				<select class="select1" id="status">
+					<option value="">请选择</option>
+					<option value="1">上架</option>
+					<option value="0">下架</option>
+				</select>
+			</div>
+    </li>
+	
+    <li><label>&nbsp;</label><input name="" type="button" class="btn" onclick="submitForm()" value="马上发布"/></li>
+    </ul>
+    
+    </form>
+    
+    </div>
+
+
+</body>
+
+</html>

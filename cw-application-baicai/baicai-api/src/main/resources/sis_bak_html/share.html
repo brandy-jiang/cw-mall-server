@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的分享</title>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	$(window).load(function(){
+    		$(".loading").addClass("loader-chanage")
+    		$(".loading").fadeOut(300)
+    	})
+    </script>
+</head>
+<body>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+	<header class="top-header fixed-header">
+		<a class="icona" href="javascript:history.go(-1)">
+				<img src="images/left.png"/>
+			</a>
+		<h3>我的分享</h3>
+			<a class="iconb" href="shopcar.html">
+			</a>
+	</header>
+	<div class="share_main">
+		<div class="share_title">妹妆商城</div>
+		<div class="share_invetateCode">注册邀请码：12345678</div>
+		<div class="share_divTG">
+			<div class="share_divTG_title">推广链接</div>
+			<div class="share_divTG_link">http://www.baidu.com</div>
+		</div>
+		<div class="share_divEwm">
+			<div class="share_divEwn_title">分享二维码</div>
+			<div class="share_divEwm_img"><img src="images/qr.png"></div>
+		</div>
+		<div class="share_divShare">
+			<div class="share_divShare_title">一键分享</div>
+			<ul class="share_divShare_img">
+				<li><img src="images/wx_icon.png" /></li>
+				<li><img src="images/pyq.png" /></li>
+			</ul>
+		</div>
+		<div class="share_banner"></div>
+	</div>
+	
+</body>
+</html>

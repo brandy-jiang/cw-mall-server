@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 152
+	});
+	search();
+});
+function search(){
+    $("#tb1").html("");
+    var param = {};
+    param['page'] = 1;
+    if($("#deviceNo").val() != ''){
+        param['deviceNo'] = $("#deviceNo").val();
+    }
+    if($("#owner").val() != ''){
+        param['owner'] = $("#owner").val();
+    }
+    if($("#status").val() != ''){
+        param['status'] = $("#status").val();
+    }
+
+    console.log(param);
+    $.post("/api/backend/device/list",
+        // {
+        //     page:1,
+        //     nickname:$("#nickname").val(),
+        //     mobile:$("#mobile").val(),
+        //     level:$("#level").val(),
+        //     invCode:$("#invCode").val()
+        // },
+        param,
+
+        function( data ){
+
+            console.log(data);
+            //var response = $.parseJSON(data.data);
+            $.each(data.data, function (index, d) {
+
+                var $tr = $('<tr>').append(
+
+                    $('<td>').text(d.deviceNo + ""),
+                    $('<td>').text(d.bindTime + ""),
+                    $('<td>').text(d.owner + ""),
+                    $('<td>').text(d.status + ""),
+                    $('<td>').text(d.mine + "")
+
+                ); //.appendTo('#records_table');
+                console.log($tr.html());
+
+
+                // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+                $("#tb1").append($tr);
+            });
+            $("#ct").text(data.count);
+        });
+}
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">矿机管理</a></li>
+    </ul>
+    </div>
+     <div class="formbody">
+		<div id="usual1" class="usual"> 
+			<ul class="seachform1">
+				<li><label>矿机编号</label><input name="" id="deviceNo" type="text" class="scinput1" /></li>
+				<li><label>所属用户</label><input name="" id="owner" type="text" class="scinput1" /></li>
+				<li><label>矿机状态</label>
+					<div class="vocation">
+						<select class="select3" id="status">
+							<option selected value="" >请选择</option>
+							<option value="1">开启</option>
+							<option value="0">关闭</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div style="clear:both"></div>
+    		<ul class="seachform1">
+				<li class="sarchbtn"><label>&nbsp;</label><input name="" type="button" class="scbtn" onclick="search()" value="查询"/></li>
+			</ul>
+    
+			
+    
+    
+			
+
+    
+    
+    
+    <div class="formtitle"><span>矿机列表</span></div>
+    
+    <table class="tablelist">
+    	<thead>
+    	<tr>
+			<th>矿机编号</th>
+			<th>绑定日期</th>
+			<th>所属用户</th>
+			<th>矿机状态</th>
+			<th>矿机挖矿数</th>
+        </tr>
+        </thead>
+        <tbody id="tb1">
+        <!--<tr>-->
+			<!--<td>39392039293293029032</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>张三</td>-->
+			<!--<td>开启</td>-->
+			<!--<td>39393932</td>-->
+        <!--</tr> -->
+        <!--<tr>-->
+			<!--<td>39392039293293029032</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>张三</td>-->
+			<!--<td>开启</td>-->
+			<!--<td>39393932</td>-->
+        <!--</tr> -->
+		<!--<tr>-->
+			<!--<td>39392039293293029032</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>张三</td>-->
+			<!--<td>开启</td>-->
+			<!--<td>39393932</td>-->
+        <!--</tr> -->
+		<!--<tr>-->
+			<!--<td>39392039293293029032</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>张三</td>-->
+			<!--<td>开启</td>-->
+			<!--<td>39393932</td>-->
+        <!--</tr> -->
+		<!--<tr>-->
+			<!--<td>39392039293293029032</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>张三</td>-->
+			<!--<td>开启</td>-->
+			<!--<td>39393932</td>-->
+        <!--</tr> -->
+
+        </tbody>
+    </table>
+    
+	 <div class="pagin">
+    	<div class="message">共 <i class="blue" id="ct"></i> 条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
+        <ul class="paginList">
+        <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+        <li class="paginItem"><a href="javascript:;">1</a></li>
+        <li class="paginItem current"><a href="javascript:;">2</a></li>
+        <li class="paginItem"><a href="javascript:;">3</a></li>
+        <li class="paginItem"><a href="javascript:;">4</a></li>
+        <li class="paginItem"><a href="javascript:;">5</a></li>
+        <li class="paginItem more"><a href="javascript:;">...</a></li>
+        <li class="paginItem"><a href="javascript:;">10</a></li>
+        <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+        </ul>
+    </div>
+	<center>
+   		<input name="" type="button" class="scbtn1" value="收益设置" onclick="javascript:window.location='device_config.html?id=1'"/>
+	</center>
+ 
+
+    
+    
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">商品发布</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>添加商品</span></div>
+    <form>
+    <ul class="forminfo">
+    <li><label>商品名称<b>*</b></label><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+   
+    <li><label>商品类别<b>*</b></label>
+		 <div class="vocation">
+				<select class="select1">
+					<option selected value="">请选择</option>
+					<option value="OP">自主商品</option>
+					<option value="Daycase">联营商品</option>
+				</select>
+			</div>
+    </li>
+    
+   	
+    <li><label>商品详情<b>*</b></label>
+    
+
+    <textarea id="content7" name="content" style="width:700px;height:250px;visibility:hidden;"></textarea>
+    
+    </li>
+	<li><label>商品数量<b>*</b></label><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+	<li><label>价格<b>*</b></label><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></li>
+	<li><label>分享奖<b>*</b></label>
+		<fieldset>
+			<table>
+				<tr>
+					<th>会员1奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>会员2奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>会员3奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+			</table>
+			
+		</fieldset>
+	</li>
+	<li><label>业绩奖<b>*</b></label>
+		<fieldset>
+			<table>
+				<tr>
+					<th>钻石会员奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>代理人奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+				<tr>
+					<th>合伙人奖励</th>
+					<td><input name="" type="text" class="dfinput" value=""  style="width:518px;"/></td>
+				</tr>
+			</table>
+		</fieldset>
+	</li>
+	<li><label>是否上架<b>*</b></label>
+		 <div class="vocation">
+				<select class="select1">
+					<option selected value="">请选择</option>
+					<option value="OP">上架</option>
+					<option value="Daycase">下架</option>
+				</select>
+			</div>
+    </li>
+	
+    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="马上发布"/></li>
+    </ul>
+    
+    </form>
+    
+    </div>
+
+
+</body>
+
+</html>

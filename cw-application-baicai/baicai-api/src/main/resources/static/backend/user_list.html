@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 152
+	});
+
+    $.post("/api/backend/user/list", {page:1}, function( data ){
+
+        console.log(data);
+		//var response = $.parseJSON(data.data);
+        $.each(data.data, function (index, d) {
+
+            var $tr = $('<tr>').append(
+                $('<td>').html('<input name="" type="checkbox" value="" />'),
+                $('<td>').text(d.nickname + ""),
+                $('<td>').text(d.level + ""),
+                $('<td>').text(d.inviteFrom + ""),
+                $('<td>').text(d.mobile + ""),
+                $('<td>').text(d.createTime + ""),
+                $('<td>').text(d.score + ""),
+                $('<td>').html('<a href="user_add.html?id=' + d.id + '" class="tablelink">编辑</a>     <a href="javascript:void(0);" onclick="deleteUser(' + d.id + ');" class="tablelink"> 删除</a>')
+            ); //.appendTo('#records_table');
+            console.log($tr.html());
+
+
+            // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+            $("#tb1").append($tr);
+        });
+        $("#ct").text(data.count);
+    });
+});
+
+function search(){
+    $("#tb1").html("");
+    var param = {};
+    param['page'] = 1;
+    if($("#nickname").val() != ''){
+        param['nickname'] = $("#nickname").val();
+    }
+    if($("#mobile").val() != ''){
+        param['mobile'] = $("#mobile").val();
+    }
+    if($("#level").val() != ''){
+        param['level'] = $("#level").val();
+    }
+    if($("#invCode").val() != ''){
+        param['invCode'] = $("#invCode").val();
+    }
+    console.log(param);
+    $.post("/api/backend/user/list",
+            // {
+            //     page:1,
+            //     nickname:$("#nickname").val(),
+            //     mobile:$("#mobile").val(),
+            //     level:$("#level").val(),
+            //     invCode:$("#invCode").val()
+            // },
+        param,
+
+        function( data ){
+
+        console.log(data);
+        //var response = $.parseJSON(data.data);
+        $.each(data.data, function (index, d) {
+
+            var $tr = $('<tr>').append(
+                $('<td>').html('<input name="" type="checkbox" value="" />'),
+                $('<td>').text(d.nickname + ""),
+                $('<td>').text(d.level + ""),
+                $('<td>').text(d.inviteFrom + ""),
+                $('<td>').text(d.mobile + ""),
+                $('<td>').text(d.createTime + ""),
+                $('<td>').text(d.score + ""),
+                $('<td>').html('<a href="user_add.html?id=' + d.id + '" class="tablelink">编辑</a>     <a href="javascript:void(0);" onclick="deleteUser(' + d.id + ');" class="tablelink"> 删除</a>')
+            ); //.appendTo('#records_table');
+            console.log($tr.html());
+
+
+            // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+            $("#tb1").append($tr);
+        });
+        $("#ct").text(data.count);
+    });
+}
+function deleteUser(uid) {
+    if(confirm('是否删除该记录')){
+        $.post("/api/backend/user/del",{id:uid},function (data) {
+            if(data.msg == 'success'){
+                search();
+            }
+        });
+    }
+}
+
+</script>
+</head>
+
+<body class="sarchbody">
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">用户管理</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+		<div id="usual1" class="usual"> 
+			<ul class="seachform1">
+				<li><label>用户名</label><input name="" id="nickname" type="text" class="scinput1" /></li>
+				<li>
+					<label>用户级别</label>
+					<div class="vocation">
+						<select class="select3" id="level">
+							<option value="0">普通会员</option>
+							<option value="1">黄金会员</option>
+							<option value="2">钻石会员</option>
+							<option value="3">代理</option>
+							<option value="4">合伙人</option>
+						</select>
+					</div>
+				</li>
+    
+				<li>
+					<label>推荐人</label>  
+					<input name="" type="text" id="invCode" class="scinput1" />
+				</li>  
+				
+			</ul>
+			<div style="clear:both"></div>
+    		<ul class="seachform1">
+			<li><label>手机号</label><input name="" id="mobile" type="text" class="scinput1" /></li>
+			</ul>
+			
+   			 <div style="clear:both"></div>
+			<ul class="seachform1">
+				<li class="sarchbtn"><label>&nbsp;</label><input name="" type="button" class="scbtn" value="查询" onclick="search();"/>   <input name="" type="button" class="scbtn1" value="添加" onclick="javascript:window.location='user_add.html'"/> </li>
+			</ul>
+    
+    <div class="formtitle"><span>用户列表</span></div>
+    
+    <table class="tablelist" id="table1">
+    	<thead>
+    	<tr>
+			<th><input name="" type="checkbox" value="" checked="checked"/></th>
+			<th>用户名</th>
+			<th>用户级别</th>
+			<th>推荐人</th>
+			<th>手机号</th>
+			<th>注册时间</th>
+			<th>积分</th>
+			<th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tb1">
+        <!--<tr>-->
+			<!--<td><input name="" type="checkbox" value="" /></td>-->
+			<!--<td>张三</td>-->
+			<!--<td>普通会员</td>-->
+			<!--<td>18288382</td>-->
+			<!--<td>39949392</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>30</td>-->
+			<!--<td><a href="user_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>-->
+        <!--</tr> -->
+        <!--<tr>-->
+			<!--<td><input name="" type="checkbox" value="" /></td>-->
+			<!--<td>李三</td>-->
+			<!--<td>黄金会员</td>-->
+			<!--<td>18288382</td>-->
+			<!--<td>39949392</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>30</td>-->
+			<!--<td><a href="user_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>-->
+		<!--</tr> -->
+		<!--<tr>-->
+			<!--<td><input name="" type="checkbox" value="" /></td>-->
+			<!--<td>网三</td>-->
+			<!--<td>钻石会员</td>-->
+			<!--<td>18288382</td>-->
+			<!--<td>39949392</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>30</td>-->
+			<!--<td><a href="user_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>-->
+        <!--</tr> -->
+		<!--<tr>-->
+			<!--<td><input name="" type="checkbox" value="" /></td>-->
+			<!--<td>季三</td>-->
+			<!--<td>代理人</td>-->
+			<!--<td>18288382</td>-->
+			<!--<td>39949392</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>30</td>-->
+			<!--<td><a href="user_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>-->
+        <!--</tr> -->
+		<!--<tr>-->
+			<!--<td><input name="" type="checkbox" value="" /></td>-->
+			<!--<td>爱三</td>-->
+			<!--<td>合伙人</td>-->
+			<!--<td>18288382</td>-->
+			<!--<td>39949392</td>-->
+			<!--<td>2013-09-09 15:05</td>-->
+			<!--<td>30</td>-->
+			<!--<td><a href="user_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>-->
+        <!--</tr> -->
+        <!---->
+    
+        </tbody>
+    </table>
+    
+	<div class="pagin">
+			<div class="message">All <i class="blue" id="ct"></i> Records，Current&nbsp;<i class="blue">2&nbsp;</i>page</div>
+			<ul class="paginList">
+			<li class="paginItem"><a href="javascript:;">&lt;&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;&gt;</a></li>
+			</ul>
+		</div>
+       
+	</div> 
+ 
+
+    
+    
+    </div>
+
+
+</body>
+
+</html>

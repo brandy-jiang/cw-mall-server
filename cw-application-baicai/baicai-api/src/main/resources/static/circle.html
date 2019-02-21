@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>我的矿机</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar1 mui-bar-nav mui-bar-nav1" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo top-sch-boxthree flex-col">
+	                     
+	        </div>
+	    </header>
+	    <!--header end-->
+	    
+	    <div class="warp clearfloat">
+	    	<div class="h-top clearfloat box-s">
+	    		<div class="tu clearfloat fl">
+	    			<img src="img/touxiang.png"/>
+	    		</div>
+	    		<div class="content clearfloat fl">
+	    			<p class="hname">王小二</p>
+	    			<p class="htel">13035059866</p>
+	    			<p class="hpthy">普通会员</p>
+	    		</div>
+	    		
+	    	</div>
+	    	
+	    	<div class="cashlist clearfloat">
+	    		<ul>
+	    			<li class="box-s">
+	    				
+	    					<p class="fl">矿机101001100101<button class="btnTk">提矿</button></p>
+	    					<i class="iconfont fr">
+								<button class="mwui-switch-btn" id="mwui-switch-btn1"><span change="开">关</span><input type="hidden" name="open_topbar" value="0" /></button> 
+							</i>
+	    				
+	    			</li>
+	    			<li class="box-s">
+	    					<p class="fl">挖矿数：</p>
+	    					<i class="iconfont fr" id="circle1"></i>
+							<input type="hidden" value="" id="txtCircle1">
+	    			</li>
+	    			
+	    		</ul>
+				
+				<ul>
+	    			<li class="box-s">
+	    				
+	    					<p class="fl">矿机101001102222<button class="btnTk">提矿</button></p>
+	    					<i class="iconfont fr">
+								<button class="mwui-switch-btn" id="mwui-switch-btn2"><span change="开">关</span><input type="hidden" name="open_topbar" value="0" /></button> 
+							</i>
+	    				
+	    			</li>
+	    			<li class="box-s">
+	    					<p class="fl">挖矿数：</p>
+	    					<i class="iconfont fr" id="circle2"></i>
+							<input type="hidden" value="" id="txtCircle2">
+	    			</li>
+	    			
+	    		</ul>
+	    	</div>
+	    	
+	    </div>
+	    
+		<!--footer star-->
+	    <footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li>
+					<a href="index.html">
+						<img src="img/footer001.png"/>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="share.html">
+						<img src="img/footer005.png"/>
+						<p>我的分享</p>
+					</a>
+				</li>
+				<li>
+					<a href="wallet.html">
+						<img src="img/footer002.png"/>
+						<p>我的钱包</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<img src="img/footer003.png"/>
+						<p>购物车</p>
+					</a>
+				</li>
+				
+				<li class="active">
+					<a href="center.html">
+						<img src="img/footer04.png"/>
+						<p>会员中心</p>
+					</a>
+				</li>
+
+			</ul>
+		</footer>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+	<script type="text/javascript">
+	$(function() { 
+		function add(a, b) {
+			var c, d, e;
+			try {
+				c = a.toString().split(".")[1].length;
+			} catch (f) {
+				c = 0;
+			}
+			try {
+				d = b.toString().split(".")[1].length;
+			} catch (f) {
+				d = 0;
+			}
+			return e = Math.pow(10, Math.max(c, d)), (a * e + b * e) / e;
+		}
+		
+		var c1 = document.getElementById("circle1");
+		var saC1;
+		funC1=function(){
+						if(c1.innerHTML==""){c1.innerHTML=0}
+						var cc1=parseFloat(c1.innerHTML);
+						
+						c1.innerHTML=add(cc1,0.002);
+						//++c1.innerHTML;
+						document.getElementById("txtCircle1").value=c1.innerHTML;
+						if(c1.innerHTML==0){
+							clearInterval(saC1);
+						}
+					}
+		
+		var c2 = document.getElementById("circle2");
+		var saC2;
+		funC2=function(){
+						if(c2.innerHTML==""){c2.innerHTML=0}
+						var cc2=parseFloat(c2.innerHTML);
+						
+						c2.innerHTML=add(cc2,0.002);
+						//++c1.innerHTML;
+						document.getElementById("txtCircle2").value=c2.innerHTML;
+						if(c2.innerHTML==0){
+							clearInterval(saC2);
+						}
+					}
+		$('#mwui-switch-btn1').each(function() {
+			$(this).bind("click", function() { 
+				var btn = $(this).find("span");
+				var change = btn.attr("change");
+				btn.toggleClass('off'); 
+				
+				if(btn.attr("class") == 'off') { 
+					$(this).find("input").val("0");
+					btn.attr("change", btn.html()); 
+					btn.html(change);
+					$(this).css({"background": "#01aa6d"});
+					saC1 = setInterval(funC1,1000);
+					
+				} else { 
+					$(this).find("input").val("1");
+					btn.attr("change", btn.html()); 
+					btn.html(change);
+					$(this).css({"background": "#f1f1f1"});
+					
+					clearInterval(saC1);
+					//alert(document.getElementById("txtCircle1").value);
+				}  
+
+				return false;
+			});
+			
+		});
+
+
+		$('#mwui-switch-btn2').each(function() {
+			$(this).bind("click", function() { 
+				var btn = $(this).find("span");
+				var change = btn.attr("change");
+				btn.toggleClass('off'); 
+				
+				if(btn.attr("class") == 'off') { 
+					$(this).find("input").val("0");
+					btn.attr("change", btn.html()); 
+					btn.html(change);
+					$(this).css({"background": "#01aa6d"});
+					saC2= setInterval(funC2,1000);
+					
+				} else { 
+					$(this).find("input").val("1");
+					btn.attr("change", btn.html()); 
+					btn.html(change);
+					$(this).css({"background": "#f1f1f1"});
+					
+					clearInterval(saC2);
+					//alert(document.getElementById("txtCircle1").value);
+				}  
+
+				return false;
+			});
+			
+		});
+		
+	});
+</script> 
+</html>

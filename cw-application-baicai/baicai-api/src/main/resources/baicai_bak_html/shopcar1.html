@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>购物车</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+<style>
+body,html{margin:0;padding:0;height:100%}
+body{min-width:320px;margin:0;padding:0;font-family:"microsoft yahei",Verdana,Arial,Helvetica,sans-serif;font-size:1em}
+a{text-decoration:none}
+
+*{margin:0;padding:0}
+div{margin:0;padding:0}
+li,ul{list-style:none}
+
+.body{width:100%;max-width:640px;margin:0 auto;padding-bottom:3.2rem;box-sizing:border-box}
+
+em{font-style:normal}
+.shop{width:100%;height:2.3rem;border-bottom:1px solid #dcdcdc;line-height:2.3rem;padding-left:2rem;box-sizing:border-box}
+.shop i{display:inline-block;width:1.3rem;height:1.2rem;vertical-align:sub;margin-right:5px}
+.product{width:100%;padding-bottom:3.05rem}
+.product .product-box{width:100%;height:5.8rem;position:relative}
+.product-box .product-ckb{width:3rem;height:100%;display:inline-block;float:left;text-align:center;line-height:5.9rem;z-index:99;position:absolute}
+.product-ckb em{width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid #B8B4B4;display:inline-block;cursor:pointer}
+.product-ckb .product-xz{background:url(../img/gouico.png) no-repeat 0 0;background-size:1.1rem;border:0;display:inline-block}
+.product-sx{float:left;height:5.8rem;padding:.6rem 0;border-bottom:1px solid #e1e1e1;padding-left:3rem;display:inline-block;width:100%;box-sizing:border-box;position:absolute;top:0;left:0}
+.product-sx .product-img{width:4.5rem;height:4.5rem;display:inline-block;float:left}
+.product-sx .product-name{font-size:.8rem;color:#000;max-width:70%;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;padding-left:10px}
+.product-sx .product-price{font-size:1rem;color:#e46b7e;margin:18px 0 0 14px;display:inline-block;float:left}
+.product-amount{position:absolute;right:15px;bottom:10px}
+.product_gw{border:1px solid #dbdbdb;width:110px;line-height:25px;overflow:hidden;font-size:.6rem}
+.product_gw em{display:block;height:25px;width:35px;float:left;color:#7A7979;border-right:1px solid #dbdbdb;text-align:center;cursor:pointer}
+.product_gw .product-num{display:block;float:left;text-align:center;width:38px;font-style:normal;font-size:12px;line-height:25px;border:0;pointer-events:none}
+.product_gw em.product-add{float:right;border-right:0;border-left:1px solid #dbdbdb}
+.product-del{width:1.15rem;display:inline-block;position:absolute;right:5px;top:24px;cursor:pointer}
+.product-del img{max-width:100%;vertical-align:middle}
+
+.product-js{width:100%;height:3rem;display:inline-block;position:fixed;bottom:4rem;border-top:1px solid #bfbfbf;line-height:3rem;max-width:640px;background:#fff;z-index:99}
+.product-al{display:inline-block;height:3rem;width:7.5rem}
+.product-js .product-all{width:3rem;height:100%;display:inline-block;float:left;text-align:center;line-height:3.5rem}
+.product-js .product-all em{width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid #B8B4B4;display:inline-block;cursor:pointer}
+.product-js .product-all .product-all-on{background:url(img/gouico.png) no-repeat 0 0;background-size:1.1rem;border:0;display:inline-block}
+.all-xz{cursor:pointer}
+.product-all-qx{color:#797979}
+.all-sl{color:#797979;display:inline-block;margin-left:8px}
+.product-all-sl{position:relative;top:1px}
+.all-product{text-align:right;float:right}
+.all-product .all-product-a{font-size:1.1rem;color:#f41638;font-weight:bolder;display:inline-block;margin-right:10px}
+.product-sett{float:right;width:6.5rem;text-align:center;color:#fff;background:#01aa6d}
+.product-sett-a{background:#b2b2b2;pointer-events:none}
+.kon-cat{display:none}
+.catkon{position:absolute;top:0;left:0;width:100%;height:100%;padding-bottom:3.2rem;box-sizing:border-box;text-align:center;background:#f4f4f4;display:table;z-index:100}
+.kon-box{text-align:center;display:table-cell;vertical-align:middle;cursor:pointer}
+.kon-hz{width:50%;margin:0 auto}
+.kon-box .kon-wz{display:block;font-size:1rem;color:#aaa;margin:20px 0}
+.kon-box .kon-lj{display:inline-block;width:100%;height:2rem;line-height:2rem;background:#383838;color:#fff;margin-top:10px}
+
+.mui-bar{ width:100%; height:40px;background:#25cb83;}
+.top-sch-box{width:100%; height:40px; line-height:40px; font-size:20px; font-family:"微软雅黑"; color:#FFF;}
+
+.fixed-footer{ position: fixed; bottom: 0; left: 0; z-index: 99;}
+.page-footer{ width: 100%; box-shadow: 0 -2px 4px #d7d7d7; background-color: #fff;}
+.page-footer ul{ width: 100%; background-color: #fff; height: 4em;}
+.page-footer ul li{  float: left; width: 20%; text-align: center; padding: 3% 0 1%;}
+.page-footer ul li a{ width: 100%; display: block;}
+.page-footer ul .active a p{ color: #f58611;}
+.page-footer ul li img{  width: 20%;}
+.page-footer ul li p{ font-size:.4rem; color: #333;margin-top: 3%;}
+</style>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo flex-col">
+	                      购物车
+	        </div>
+	        <a class="btn" href="#">
+	            <i class="iconfont icon-lajixiang"></i>
+	        </a>
+	    </header>
+	    <!--header end-->
+	    
+	  <div class="body">
+			
+			<div class="product">
+				<div class="product-box">
+					<div class="product-ckb"><em class="product-em product-xz"></em></div>
+					<div class="product-sx">
+						<a href="###">
+							<img src="img/a3.png" class="product-img" />
+							<span class="product-name">酷冷至尊(Cooler Master)T610P CPU风冷散热器</span>
+						</a>
+						<span class="product-price">菜心价：<span class="price">296</span></span>
+						<div class="product-amount">
+							<div class="product_gw">
+							   <em class="product-jian">-</em>
+							   <input type="text" value="1" class="product-num"/>
+							   <em class="product-add">+</em>
+							</div>
+						</div>
+						<div class="product-del"><img src="img/deleteico.png"/></div>
+					</div>
+				</div>
+				<div class="product-box">
+					<div class="product-ckb"><em class="product-em"></em></div>
+					<div class="product-sx">
+						<a href="###">
+							<img src="img/a1.png" class="product-img" />
+							<span class="product-name">游戏悍将 35英寸曲面电竞显示器21:9带鱼屏准4K游戏显示器</span>
+						</a>
+						<span class="product-price">菜心价：<span class="price">296</span></span>
+						<div class="product-amount">
+							<div class="product_gw">
+							   <em class="product-jian">-</em>
+							   <input type="text" value="1" class="product-num"/>
+							   <em class="product-add">+</em>
+							</div>
+						</div>
+						<div class="product-del"><img src="img/deleteico.png"/></div>
+					</div>
+				</div>
+				
+				<div class="product-box">
+					<div class="product-ckb"><em class="product-em"></em></div>
+					<div class="product-sx">
+						<a href="###">
+							<img src="img/a2.png" class="product-img" />
+							<span class="product-name">技嘉（GIGABYTE） 2080TURBO OC 8GC</span>
+						</a>
+						<span class="product-price">菜心价：<span class="price">296</span></span>
+						<div class="product-amount">
+							<div class="product_gw">
+							   <em class="product-jian">-</em>
+							   <input type="text" value="1" class="product-num"/>
+							   <em class="product-add">+</em>
+							</div>
+						</div>
+						<div class="product-del"><img src="img/deleteico.png"/></div>
+					</div>
+				</div>
+				
+				<div class="product-box">
+					<div class="product-ckb"><em class="product-em"></em></div>
+					<div class="product-sx">
+						<a href="###">
+							<img src="img/a4.png" class="product-img" />
+							<span class="product-name">AMD 锐龙 5 2600X 处理器 (R5) 6核12线程 AM4 </span>
+						</a>
+						<span class="product-price">菜心价：<span class="price">296</span></span>
+						<div class="product-amount">
+							<div class="product_gw">
+							   <em class="product-jian">-</em>
+							   <input type="text" value="1" class="product-num"/>
+							   <em class="product-add">+</em>
+							</div>
+						</div>
+						<div class="product-del"><img src="img/deleteico.png"/></div>
+					</div>
+				</div>
+			</div>
+			<div class="product-js">
+				<div class="product-al">
+					<div class="product-all">
+						<em class=""></em>
+					</div>
+					<div class="all-xz"><span class="product-all-qx">全选</span><div class="all-sl" style="display: none;">(<span class="product-all-sl">0</span>)</div></div>
+				</div>
+				<a href="order.html" class="product-sett product-sett-a">结算</a>
+				<div class="all-product"><span class="all-product-a">菜心;<span class="all-price">296</span></span></div>
+				
+			</div>
+		</div>
+		<!--购物车空-->
+		<div class="kon-cat">
+			<div class="catkon">
+				<div class="kon-box">
+					<div class="kon-hz">
+						<img src="img/cart-air.png" />
+						<span class="kon-wz">购物车什么都没有</span>
+						<a href="###" class="kon-lj">去逛逛</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	    
+		<!--footer star-->
+	    <footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li>
+					<a href="index.html">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="cation.html">
+						<i class="iconfont icon-icon04"></i>
+						<p>分类</p>
+					</a>
+				</li>
+				<li class="active">
+					<a href="shopcar.html">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="login.html">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+	<script src="js/shoppingcart.js" type="text/javascript" charset="utf-8"></script>
+</html>

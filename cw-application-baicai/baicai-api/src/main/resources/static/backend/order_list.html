@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 152
+	});
+    search();
+});
+function search(){
+    $("#tb1").html('<thead>\n' +
+        '    \t<tr>\n' +
+        '\t\t\t<th>商品详情</th>\n' +
+        '\t\t\t<th>单价</th>\n' +
+        '\t\t\t<th>数量</th>\n' +
+        '\t\t\t<th>金额</th>\n' +
+        '\t\t\t<th>订单状态</th>\n' +
+        '\t\t\t<th>操作</th>\n' +
+        '        </tr>\n' +
+        '        </thead>');
+    var param = {};
+    param['page'] = 1;
+    if($("#orderNo").val() != ''){
+        param['orderNo'] = $("#orderNo").val();
+    }
+    if($("#status").val() != ''){
+        param['status'] = $("#status").val();
+    }
+    if($("#startDate").val() != ''){
+        param['startDate'] = $("#startDate").val();
+    }
+    if($("#endDate").val() != ''){
+        param['endDate'] = $("#endDate").val();
+    }
+    if($("#customerName").val() != ''){
+        param['customerName'] = $("#customerName").val();
+    }
+    console.log(param);
+    $.post("/api/backend/order/list",
+        param,
+
+        function( data ){
+
+            console.log(data);
+            //var response = $.parseJSON(data.data);
+
+            $.each(data.data, function (index, d) {
+                var $bd;
+                var $tr = $('<tr class="odd">').append(
+                    $('<td colspan="2">').text('订单编号：' + d.orderNo),
+                    $('<td>').text("下单时间 ：" + d.createTime + ""),
+                    $('<td colspan="2">>').text("买家：" + d.customerName + ""),
+                    $('<td class="clear">').html('<a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a>')
+                ); //.appendTo('#records_table');
+                $bd = $('<tbody>').append($tr);
+                if (d.orderDetailsDtos != null && d.orderDetailsDtos.length > 0) {
+
+                    $.each(d.orderDetailsDtos, function (ind, dd) {
+                        var $ttr = $('<tr>').append(
+                            $('<td>').html('<a href="商品发布_编辑商品.html">' + dd.productName + '</a>'),
+                            $('<td>').text(dd.delta / 100 + ""),
+                            $('<td>').text(dd.num + ""),
+                            $('<td>').text(dd.sumDelta / 100 + ""),
+                            $('<td>').text(d.strStatus + ""),
+                            $('<td class="clear">').html("&nbsp;")
+                        );
+                        $bd.append($ttr);
+                    });
+                }
+
+
+                console.log($bd.html());
+
+
+                // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+                $("#tb1").append($bd);
+            });
+            $("#ct").text(data.count);
+        });
+}
+function deleteUser(uid) {
+    if(confirm('是否删除该记录')){
+        $.post("/api/backend/order/del",{id:uid},function (data) {
+            if(data.msg == 'success'){
+                search();
+            }
+        });
+    }
+}
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">商品发布</a></li>
+    </ul>
+    </div>
+     <div class="formbody">
+		<div id="usual1" class="usual"> 
+			<ul class="seachform1">
+				<li><label>订单编号</label><input name="" id="orderNo" type="text" class="scinput1" /></li>
+				<li><label>订单状态</label>
+					<div class="vocation">
+						<select class="select3" id="status">
+							<option selected value="">请选择</option>
+							<option value="2">买家已付款</option>
+							<option value="3">已发货</option>
+							<option value="4">已收货</option>
+						</select>
+					</div>
+				</li>
+				
+			</ul>
+			<div style="clear:both"></div><div id="usual1" class="usual"> 
+			<ul class="seachform1">
+				<li><label>下单时间：</label><input name="" type="text" class="scinput1" id="startDate"  onClick="WdatePicker()" />~<input name="" id="endDate" type="text" class="scinput1"  onClick="WdatePicker()" /></li>
+				
+				<li><label>购买人：</label>
+					<input name="" type="text" id="customerName" class="scinput1" />
+				</li>
+			</ul>
+			<div style="clear:both"></div>
+			
+    		<ul class="seachform1">
+				<li class="sarchbtn"><label>&nbsp;</label><input name="" type="button" onclick="search()" class="scbtn" value="查询"/> </li>
+			</ul>
+
+    
+    <div class="formtitle"><span>订单列表</span></div>
+    
+    <table class="tablelist" id="tb1">
+    	<thead>
+    	<tr>
+			<th>商品详情</th>
+			<th>单价</th>
+			<th>数量</th>
+			<th>金额</th>
+			<th>订单状态</th>
+			<th>操作</th>
+        </tr>
+        </thead>
+
+        <!--<tbody>-->
+			<!--<tr class="odd">-->
+				<!--<td colspan="2">订单编号：3293903239239029033</td>-->
+				<!--<td>下单时间 ：2013-09-09 15:05</td>-->
+				<!--<td colspan="2">买家：qq</td>-->
+				<!--<td class="clear"><a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a></td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td><a href="商品发布_编辑商品.html">百能大白菜</a></td>-->
+				<!--<td>14</td>-->
+				<!--<td>2</td>-->
+				<!--<td>28</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td><a href="商品发布_编辑商品.html">健康胶囊</a></td>-->
+				<!--<td>30</td>-->
+				<!--<td>20</td>-->
+				<!--<td>6000</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+        <!--</tbody>-->
+		<!--<tbody>-->
+			<!--<tr class="odd">-->
+				<!--<td colspan="2">订单编号：3293903239239029033</td>-->
+				<!--<td>下单时间 ：2013-09-09 15:05</td>-->
+				<!--<td colspan="2">买家：qq</td>-->
+				<!--<td class="clear"><a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a></td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>百能大白菜</td>-->
+				<!--<td>14</td>-->
+				<!--<td>2</td>-->
+				<!--<td>28</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>健康胶囊</td>-->
+				<!--<td>30</td>-->
+				<!--<td>20</td>-->
+				<!--<td>6000</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+        <!--</tbody>-->
+		<!--<tbody>-->
+			<!--<tr class="odd">-->
+				<!--<td colspan="2">订单编号：3293903239239029033</td>-->
+				<!--<td>下单时间 ：2013-09-09 15:05</td>-->
+				<!--<td colspan="2">买家：qq</td>-->
+				<!--<td class="clear"><a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a></td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>百能大白菜</td>-->
+				<!--<td>14</td>-->
+				<!--<td>2</td>-->
+				<!--<td>28</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>健康胶囊</td>-->
+				<!--<td>30</td>-->
+				<!--<td>20</td>-->
+				<!--<td>6000</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+        <!--</tbody>-->
+		<!--<tbody>-->
+			<!--<tr class="odd">-->
+				<!--<td colspan="2">订单编号：3293903239239029033</td>-->
+				<!--<td>下单时间 ：2013-09-09 15:05</td>-->
+				<!--<td colspan="2">买家：qq</td>-->
+				<!--<td class="clear"><a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a></td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>百能大白菜</td>-->
+				<!--<td>14</td>-->
+				<!--<td>2</td>-->
+				<!--<td>28</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>健康胶囊</td>-->
+				<!--<td>30</td>-->
+				<!--<td>20</td>-->
+				<!--<td>6000</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+        <!--</tbody>-->
+		<!--<tbody>-->
+			<!--<tr class="odd">-->
+				<!--<td colspan="2">订单编号：3293903239239029033</td>-->
+				<!--<td>下单时间 ：2013-09-09 15:05</td>-->
+				<!--<td colspan="2">买家：qq</td>-->
+				<!--<td class="clear"><a href="order_add.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a> <a href="#" class="tablelink">打印发货单</a></td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>百能大白菜</td>-->
+				<!--<td>14</td>-->
+				<!--<td>2</td>-->
+				<!--<td>28</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+			<!--<tr>-->
+				<!--<td>健康胶囊</td>-->
+				<!--<td>30</td>-->
+				<!--<td>20</td>-->
+				<!--<td>6000</td>-->
+				<!--<td>买家已付款</td>-->
+				<!--<td class="clear">&nbsp;</td>-->
+			<!--</tr> -->
+        <!--</tbody>-->
+    </table>
+    
+	<div class="pagin">
+			<div class="message">All <i class="blue" id="ct"></i> Records，Current&nbsp;<i class="blue">2&nbsp;</i>page</div>
+			<ul class="paginList">
+			<li class="paginItem"><a href="javascript:;">&lt;&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;&gt;</a></li>
+			</ul>
+		</div>
+       
+	</div> 
+ 
+
+    
+    
+    </div>
+
+
+</body>
+
+</html>

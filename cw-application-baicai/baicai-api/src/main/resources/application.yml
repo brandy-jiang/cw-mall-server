@@ -1,0 +1,59 @@
+server:
+  port: 28080
+  max-http-header-size: 10240
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,text/plain,application/json
+    min-response-size: 4096
+
+logging:
+  file: logs/syt-thirdpart-tools.log
+  level:
+    org.springframework: INFO
+    org.hibernate: INFO
+    com.syt: DEBUG
+
+
+spring:
+  jpa.show-sql: true
+  jpa:
+    properties:
+      hibernate:
+        #dialect: org.hibernate.spatial.dialect.mysql.MySQL56InnoDBSpatialDialect
+      dialect: org.hibernate.dialect.MySQL5Dialect
+
+    hibernate:
+      ddl-auto: update
+  name: syt-thirdpart
+  main.banner-mode: "off"
+  messages: 
+   basename: i18n/messages #指定message的basename，多个以逗号分隔，如果不加包名的话，默认从classpath路径开始，默认: messages
+   cache-seconds: 3600 #设定加载的资源文件缓存失效时间，-1的话为永不过期，默认为-1
+  datasource:
+    #driverClassName: org.postgresql.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    connectionTestQuery: 'SELECT 1'
+    url: jdbc:mysql://localhost:3306/malldb?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
+  data:
+    rest:
+      base-path: /api
+      default-page-size: 10
+
+  profiles:
+    active: dev
+
+
+
+weixin:
+  appId: wxd813231bbad2b1a1
+  appsecret: 35d16df5c5425af5ad54cb0b4fbaadea
+
+qr:
+  code:
+#    path: /Users/jimmylee/qrcode/
+    path: d:/java/bc/qrcode/
+
+
+

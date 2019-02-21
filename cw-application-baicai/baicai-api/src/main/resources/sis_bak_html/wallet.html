@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+ <meta name="format-detection" content="telephone=no" />
+<title>我的钱包</title>
+<link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/loading.css"/>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    	$(window).load(function(){
+    		$(".loading").addClass("loader-chanage")
+    		$(".loading").fadeOut(300)
+    	})
+    </script>
+</head>
+
+<body bgcolor="#f2f2f2">
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<header class="top-header fixed-header">
+		<a class="icona" href="javascript:history.go(-1)">
+				<img src="images/left.png"/>
+			</a>
+		<h3>我的钱包</h3>
+			
+			<a class="text-top" href="#">
+				
+			</a>
+	</header>
+<!--loading页结束-->
+
+<div class="contaniner fixed-conta">
+<div class="report_Title">
+	<br/>
+	昨日收益（元）<br/>
+￥39.30
+</div>
+
+<div class="wallet_total">
+	<table cellpadding="0" cellspacing="0" align="center" class="tab_walletTable">
+		
+		<tr>
+			
+			<td onClick="javascript:window.location='share_balance.html'">分享积分<br />
+				<strong>￥398.34</strong>
+			</td>
+			
+			<td onClick="javascript:window.location='team_balance.html'">团队积分<br />
+				<strong>0.00</strong>
+			</td>
+		</tr>
+		
+		<tr>
+			<td onClick="javascript:window.location='redBox_balance.html'">我的红包<br />
+			<strong>5</strong>
+			</td>
+			<td onClick="javascript:window.location='history_balance.html'">历史收益<br />
+				<strong>0.00</strong>
+			</td>
+		</tr>
+		
+		
+	</table>
+	
+</div>
+<br>
+	<table cellpadding="0" cellspacing="0" align="center" width="100%" bgcolor="#FFFFFF">
+		
+		<tr>
+			<td align="center" width="50%"><img src="images/icon_hb.png" />
+			</td>
+			<td align="center" width="50%"><img src="images/icon_creft.png" />
+			</td>
+		</tr>
+		
+		
+		
+		
+	</table>
+</div>	
+
+
+<footer class="page-footer fixed-footer" id="footer">
+		<ul>
+			<li>
+				<a href="index.html">
+					<img src="images/footer001.png"/>
+					<p>商城首页</p>
+				</a>
+			</li>
+			<li>
+				<a href="shopcar.html">
+					<img src="images/footer003.png"/>
+					<p>购物车</p>
+				</a>
+			</li>
+			<li class="active">
+				<a href="wallet.html">
+					<img src="images/footer02.png"/>
+					<p>我的钱包</p>
+				</a>
+			</li>
+			<li>
+				<a href="self.html">
+					<img src="images/footer004.png"/>
+					<p>会员中心</p>
+				</a>
+			</li>
+		</ul>
+	</footer>
+</body>
+
+
+</html>

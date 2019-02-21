@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的分享</title>
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+	<script type="text/javascript">
+		$(window).load(function(){
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300)
+		})
+	</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+<body style="background:#30e1a1">
+	<header class="mui-bar mui-bar1 mui-bar-nav mui-bar-nav1" id="header">
+		<a class="btn" href="javascript:history.go(-1)">
+			<i class="iconfont icon-fanhui"></i>
+		</a>
+		<div class="top-sch-box top-sch-boxtwo top-sch-boxthree flex-col">
+					  
+		</div>
+	</header>
+	<div class="share_main">
+		<div class="share_title">白菜网</div>
+		<div class="share_invetateCode">注册邀请码：12345678</div>
+		
+		<div class="share_divEwm">
+			<div class="share_divEwn_title">分享二维码</div>
+			<div class="share_divEwm_img"><img src="img/qr.png"></div>
+		</div>
+		<div class="share_divShare">
+			<div class="share_divShare_title">一键分享</div>
+			<ul class="share_divShare_img">
+				<li><img src="img/wx_icon.png" /></li>
+				<li><img src="img/pyq.png" /></li>
+			</ul>
+		</div>
+		<div class="share_banner"></div>
+	</div>
+	<br /><br /><br />
+	<footer class="page-footer fixed-footer" id="footer">
+		<ul>
+			<li>
+				<a href="index.html">
+					<img src="img/footer001.png"/>
+					<p>首页</p>
+				</a>
+			</li>
+			<li class="active">
+				<a href="share.html">
+					<img src="img/footer05.png"/>
+					<p>我的分享</p>
+				</a>
+			</li>
+			<li>
+				<a href="wallet.html">
+					<img src="img/footer002.png"/>
+					<p>我的钱包</p>
+				</a>
+			</li>
+			<li>
+				<a href="shopcar.html">
+					<img src="img/footer003.png"/>
+					<p>购物车</p>
+				</a>
+			</li>
+			
+			<li>
+				<a href="center.html">
+					<img src="img/footer004.png"/>
+					<p>会员中心</p>
+				</a>
+			</li>
+			
+		</ul>
+	</footer>
+</body>
+</html>

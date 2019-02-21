@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+	$(".select3").uedSelect({
+		width : 152
+	});
+});
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>Location：</span>
+    <ul class="placeul">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">商品发布</a></li>
+    </ul>
+    </div>
+     <div class="formbody">
+		<div id="usual1" class="usual"> 
+			<ul class="seachform1">
+				<li><label>商品名称</label><input name="" type="text" class="scinput1" /></li>
+				
+				<li><label>商品类别</label>
+					<div class="vocation">
+						<select class="select3">
+							<option selected value="">请选择</option>
+							<option value="OP">自主商品</option>
+							<option value="Daycase">联营商品</option>
+						</select>
+					</div>
+				</li>
+				<li><label>是否上架</label>
+					<div class="vocation">
+						<select class="select3">
+							<option selected value="">请选择</option>
+							<option value="OP">上架</option>
+							<option value="Daycase">下架</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div style="clear:both"></div>
+    		<ul class="seachform1">
+				<li class="sarchbtn"><label>&nbsp;</label><input name="" type="button" class="scbtn" value="查询"/>   <input name="" type="button" class="scbtn1" value="添加" onclick="javascript:window.location='product_add.html'"/> </li>
+			</ul>
+    
+			
+    
+    
+			
+
+    
+    
+    
+    <div class="formtitle"><span>商品列表</span></div>
+    
+    <table class="tablelist">
+    	<thead>
+    	<tr>
+			<th><input name="" type="checkbox" value="" checked="checked"/></th>
+			<th>商品名称</th>
+			<th>发布日期</th>
+			<th>商品类别</th>
+			<th>商品数量</th>
+			<th>是否上架</th>
+			<th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>标题标题标题标题标题标题标题标题</td>
+			<td>2013-09-09 15:05</td>
+			<td>自主商品</td>
+			<td>19</td>
+			<td>上架</td>
+			<td><a href="product_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>
+        </tr> 
+        <tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>标题标题标题标题标题标题标题标题</td>
+			<td>2013-09-09 15:05</td>
+			<td>联营商品</td>
+			<td>19</td>
+			<td>上架</td>
+			<td><a href="product_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>
+        </tr> 
+		<tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>标题标题标题标题标题标题标题标题</td>
+			<td>2013-09-09 15:05</td>
+			<td>联营商品</td>
+			<td>19</td>
+			<td>上架</td>
+			<td><a href="product_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>
+        </tr> 
+		<tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>标题标题标题标题标题标题标题标题</td>
+			<td>2013-09-09 15:05</td>
+			<td>联营商品</td>
+			<td>19</td>
+			<td>上架</td>
+			<td><a href="product_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>
+        </tr> 
+		<tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>标题标题标题标题标题标题标题标题</td>
+			<td>2013-09-09 15:05</td>
+			<td>自主商品</td>
+			<td>19</td>
+			<td>上架</td>
+			<td><a href="product_edit.html" class="tablelink">编辑</a>     <a href="#" class="tablelink"> 删除</a></td>
+        </tr> 
+        
+    
+        </tbody>
+    </table>
+    
+	<div class="pagin">
+			<div class="message">All<i class="blue">1256</i>Records，Current&nbsp;<i class="blue">2&nbsp;</i>page</div>
+			<ul class="paginList">
+			<li class="paginItem"><a href="javascript:;">&lt;&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&lt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;</a></li>
+			<li class="paginItem"><a href="javascript:;">&gt;&gt;</a></li>
+			</ul>
+		</div>
+       
+	</div> 
+ 
+
+    
+    
+    </div>
+
+
+</body>
+
+</html>

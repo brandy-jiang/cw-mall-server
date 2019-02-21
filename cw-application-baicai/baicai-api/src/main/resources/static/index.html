@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>首页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+    notice();
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage");
+		$(".loading").fadeOut(300);
+
+        product();
+        $.post("/api/user/profile", function( data ){
+            console.log(data.nickname);
+            if(data){
+            	$("#mp").val(1);
+			}
+
+            console.log(data.nickname);
+            console.log($("#mp").val());
+        });
+	});
+
+	function banner(){
+
+	}
+	function notice(){
+        $.post("/api/content/listNews",
+            {},
+
+            function( data ){
+
+                console.log(data);
+                //var response = $.parseJSON(data.data);
+                $.each(data, function (index, d) {
+                    //<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>
+                    var $tr = $('<div onClick="javascript:window.location=\'notice_detail.html?id=' + d.id + '\'">');
+                    $tr.text(d.title);
+                    console.log($tr.html());
+
+
+                    // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+                    $("#noticeList").append($tr);
+                });
+                //$("#ct").text(data.count);
+            });
+
+	}
+	function product(){
+        $.post("/api/product/listHome",
+            {},
+
+            function( data ){
+
+                //console.log(data);
+                //var response = $.parseJSON(data.data);
+                $.each(data, function (index, d) {
+                    var $tr = $('<div class="list clearfloat fl">').append(
+                        $('<a href="detail.html?id=' + d.id + '">').html('<div class="tu clearfloat">\n' +
+                            '\t\t\t\t\t\t\t<img src="upload/9.jpg"/>\n' +
+                            '\t\t\t\t\t\t\t</div>\n' +
+                            '\t\t\t\t\t\t\t<div class="bottom clearfloat box-s">\n' +
+                            '\t\t\t\t\t\t\t<p class="over">' + d.name + '</p>\n' +
+                            '\t\t\t\t\t\t\t<span>\n' +
+                            '\t\t\t\t\t\t\t<strong>市场价：' + d.marketPrice + '元</strong><br />\n' +
+                            '\t\t\t\t\t\t菜心：' + d.price + '\n' +
+                            '\t\t\t\t\t\t</span>\n' +
+                            '\t\t\t\t\t\t</div>')
+
+                    ); //.appendTo('#records_table');
+                   // console.log($tr.html());
+
+
+                    // 2.6 Create a new row and append 3 columns (title+url, categories, tags)
+                    $("#tb1").append($tr);
+                });
+                //$("#ct").text(data.count);
+            });
+	}
+	function findProduct(){
+	    window.location = 'list.html?kwd=' + $('#keywords').val();
+    }
+
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>		
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn slide-menu" href="#">
+	            <i class="iconfont icon-iconfontcaidan"></i>
+	        </a>
+	        <div class="top-sch-box flex-col">
+	            <div class="centerflex">
+	                
+	                <input type="text" name="" id="keywords" value="" class="sch-txt" placeholder="输入您要搜索的商品" />
+	            </div>
+	        </div>
+	        <a class="btn" href="javascript:void(0);" onclick="findProduct()">
+				
+	           <i class="fdj iconfont icon-sousuo"></i>
+	        </a>
+	    </header>
+	    <!--header end-->
+	    
+	    <!-- 侧边导航 -->
+		<div class="slide-mask"></div>
+		<aside class="slide-wrapper">
+		  <div>
+			<ul>
+			  <li><a href="list.html">家居家纺</a></li>
+			  <li><a href="list.html">3C数码</a></li>
+			  <li><a href="list.html">家用电器</a></li>
+			  <li><a href="list.html">厨房小电</a></li>
+			  <li><a href="list.html">零食小吃</a></li>
+			  <li><a href="list.html">酒水饮料</a></li>
+			  <li><a href="list.html">个护健康</a></li>
+			  <li><a href="list.html">生活电器</a></li>
+			  <li><a href="list.html">服饰</a></li>
+			  <li><a href="list.html">五金家装</a></li>
+			</ul>
+		  </div>
+		</aside>
+	    
+		<div id="main" class="clearfloat warp" >
+		    <div class="mui-content">
+				<!--banner开始-->
+				<div class="banner swiper-container">
+		            <div class="swiper-wrapper">
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/banner1.jpg" alt=""></a></div>
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/banner2.jpg" alt=""></a></div>
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/banner3.jpg" alt=""></a></div>
+		            </div>
+		        </div>
+		        <!--banner结束-->
+		        <!--第一栏分类开始-->
+		        <div class="cation clearfloat box-s">
+		        	<ul>
+						<li>
+		        			<a href="health.html">
+		        				<img src="img/icon3.png"/>
+		        				<p>今日健康</p>
+		        			</a>
+		        		</li>
+		        		<li>
+		        			<a href="list2.html">
+		        				<img src="img/icon1.png"/>
+		        				<p>白菜商城</p>
+		        			</a>
+		        		</li>
+		        		<li>
+		        			<a href="#">
+		        				<img src="img/icon2.png" id="marketUnit"/>
+		        				<p>联盟商家</p>
+		        			</a>
+		        		</li>
+		        		
+		        		<li>
+		        			<a href="blcExchange.html">
+		        				<img src="img/icon4.png"/>
+		        				<p>BCL交易</p>
+		        			</a>
+		        		</li>
+		        	</ul>
+		        </div>
+		        <!--第一栏分类结束-->
+		        <!--滚动公告开始-->
+		        <div class="notice clearfloat box-s">
+		        	<p class="tit clearfloat fl">白菜公告：</p>
+		        	<div class="left fl clearfloat box-s">
+						<div class="slider autoplay" id="noticeList">
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+							<!--<div onClick="javascript:window.location='notice_detail.html'">这里是新闻资讯内容可以手滑滚动</div>-->
+						</div>							
+					</div>		
+					<a href="notice_list.html" class="nmore clearfloat fr">更多</a>
+		        </div>
+		        <!--滚动公告结束-->
+		         
+		        
+		        <!--like star-->
+		        <div class="like clearfloat box-s">
+		        	<div class="boutit clearfloat">
+		        		<span></span>
+		        		<samp>商城精选</samp>
+		        	</div>
+		        	<div class="content clearfloat" id="tb1">
+		        		<!--<div class="list clearfloat fl">-->
+		        			<!--<a href="detail.html">-->
+			        			<!--<div class="tu clearfloat">-->
+			        				<!--<img src="upload/9.jpg"/>-->
+			        			<!--</div>-->
+			        			<!--<div class="bottom clearfloat box-s">-->
+			        				<!--<p class="over">休闲运动男女鞋春夏秋冬款</p>-->
+			        				<!--<span>-->
+										<!--<strong>市场价：500.00元</strong><br />-->
+										<!--菜心：108.00-->
+									<!--</span>-->
+			        			<!--</div>-->
+		        			<!--</a>-->
+		        		<!--</div>-->
+		        		<!--<div class="list clearfloat fl">-->
+		        			<!--<a href="detail.html">-->
+			        			<!--<div class="tu clearfloat">-->
+			        				<!--<img src="upload/9.jpg"/>-->
+			        			<!--</div>-->
+			        			<!--<div class="bottom clearfloat box-s">-->
+			        				<!--<p class="over">休闲运动男女鞋春夏秋冬款</p>-->
+			        				<!--<span>-->
+										<!--<strong>市场价：500.00元</strong><br />-->
+										<!--菜心：108.00-->
+									<!--</span>-->
+			        			<!--</div>-->
+		        			<!--</a>-->
+		        		<!--</div>-->
+		        		<!--<div class="list clearfloat fl">-->
+		        			<!--<a href="detail.html">-->
+			        			<!--<div class="tu clearfloat">-->
+			        				<!--<img src="upload/9.jpg"/>-->
+			        			<!--</div>-->
+			        			<!--<div class="bottom clearfloat box-s">-->
+			        				<!--<p class="over">休闲运动男女鞋春夏秋冬款</p>-->
+			        				<!--<span>-->
+										<!--<strong>市场价：500.00元</strong><br />-->
+										<!--菜心：108.00-->
+									<!--</span>-->
+			        			<!--</div>-->
+		        			<!--</a>-->
+		        		<!--</div>-->
+		        		<!--<div class="list clearfloat fl">-->
+		        			<!--<a href="detail.html">-->
+			        			<!--<div class="tu clearfloat">-->
+			        				<!--<img src="upload/9.jpg"/>-->
+			        			<!--</div>-->
+			        			<!--<div class="bottom clearfloat box-s">-->
+			        				<!--<p class="over">休闲运动男女鞋春夏秋冬款</p>-->
+			        				<!--<span>-->
+										<!--<strong>市场价：500.00元</strong><br />-->
+										<!--菜心：108.00-->
+									<!--</span>-->
+			        			<!--</div>-->
+		        			<!--</a>-->
+		        		<!--</div>-->
+		        	</div>
+		        </div>
+		        <!--like end-->
+	        </div>
+		</div>
+		<div class="uSign" style="position:fixed; bottom:10em; right:0px; z-index:99999999"><img src="img/notes.png" /></div>
+		<!--footer star-->
+		<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li class="active">
+					<a href="index.html">
+						<img src="img/footer01.png"/>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="scoreMarket.html">
+						<img src="img/footer005.png"/>
+						<p>积分商城</p>
+					</a>
+				</li>
+				<li>
+					<a href="wallet.html">
+						<img src="img/footer002.png"/>
+						<p>我的钱包</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<img src="img/footer003.png"/>
+						<p>购物车</p>
+					</a>
+				</li>
+				
+				<li>
+					<a href="center.html">
+						<img src="img/footer004.png"/>
+						<p>会员中心</p>
+					</a>
+				</li>
+			
+		</ul>
+		</footer>
+		<!--footer end-->
+		<div id="disappare" style="display:none;">
+            <p>敬请期待</p>
+        </div>
+		<input type="hidden" id="mp" />
+		
+		<div id="sign" style="display:none;">
+			<p>已签到，+0.5BCL</p >
+		</div>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+		<script src="js/others.js"></script>
+		<script type="text/javascript" src="js/hmt.js" ></script>
+		<script src="slick/slick.js" type="text/javascript" ></script>
+		<!--插件-->
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script src="js/swiper.jquery.min.js"></script>
+		<!--新闻资讯滚动-->
+		<script type="text/javascript">
+			$('.autoplay').slick({
+			  slidesToShow: 1,
+			  slidesToScroll: 1,
+			  autoplay: true,
+			  autoplaySpeed: 2000,
+			});
+
+			
+			$(function(){
+				$("#marketUnit").click(function(){
+					$("#disappare").show().delay(3000).hide(300);
+				});
+				
+				// $(".uSign").click(function(){
+				// 	$("#sign").show().delay(3000).hide(300);
+				// });
+                $(".uSign").click(function(){
+                    if($("#mp").val()!=""){
+                        $.post("/api/user/checkIn", function( data ){
+                            if(data.username == 'success') {
+                                $("#sign").show().delay(3000).hide(300);
+                            }else{
+                                alert('已签到');
+							}
+                        });
+
+                    }else{
+                        window.location="login.html";
+                    }
+
+                    //document.getElementById('mobile').src = data.mobile;
+                    //console.log(data.nickname);
+                });
+
+			})
+
+		</script>
+		
+	</body>
+
+</html>
